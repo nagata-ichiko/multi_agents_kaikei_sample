@@ -1,7 +1,5 @@
 # アーキテクチャ概要
 
-<!-- review:pending id=r-20260605-010 -->
-
 ## 概要
 
 Next.js 15 App Router によるフルスタック構成。フロントエンドとAPIエンドポイントを同一リポジトリで管理する。ドメインは ledger / reporting / master の3つに分割し、それぞれ独立した Route Handler 群を持つ。
@@ -126,5 +124,3 @@ graph TD
 | `/reports/balance-sheet` | 貸借対照表 | reporting |
 | `/partners` | 取引先管理 | master |
 | `/settings/fiscal-periods` | 会計期間設定 | master |
-
-<!-- /review -->

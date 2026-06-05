@@ -1,7 +1,5 @@
 # DB設計
 
-<!-- review:pending id=r-20260605-011 -->
-
 ## 概要
 
 PostgreSQL 16 / Prisma ORM を使用する。スキーマは `prisma/schema.prisma` が正とする（出典: `logs/context/pg_shared-foundation_20260605.md`）。
@@ -167,5 +165,3 @@ erDiagram
 | FiscalPeriod | master |
 
 reporting ドメインはいずれのテーブルも読み取り専用。
-
-<!-- /review -->

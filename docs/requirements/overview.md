@@ -1,7 +1,5 @@
 # プロダクト概要
 
-<!-- review:pending id=r-20260605-001 -->
-
 ## ビジョン
 
 中小企業向けのシンプルな複式簿記会計アプリのサンプル。  
@@ -23,5 +21,3 @@
 | REQ-REPORT-003 | ダッシュボード | reporting | 実装中 |
 | REQ-MASTER-001 | 取引先管理 | master | 実装中 |
 | REQ-MASTER-002 | 会計期間設定 | master | 実装中 |
-
-<!-- /review -->
