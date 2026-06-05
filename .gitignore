@@ -69,3 +69,8 @@ logs/**/*.log
 
 # mkdocs build output
 site/
+
+# Claude Code 作業ファイル
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+tsconfig.tsbuildinfo

@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountType {
+  ASSET
+  LIABILITY
+  EQUITY
+  REVENUE
+  EXPENSE
+}
+
+enum PartnerType {
+  CUSTOMER
+  VENDOR
+  BOTH
+}
+
+enum EntryStatus {
+  DRAFT
+  POSTED
+}
+
+model Account {
+  id          String        @id @default(cuid())
+  code        String        @unique
+  name        String
+  type        AccountType
+  description String?
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  lines       JournalLine[]
+}
+
+model Partner {
+  id        String         @id @default(cuid())
+  code      String         @unique
+  name      String
+  kana      String?
+  type      PartnerType
+  email     String?
+  phone     String?
+  address   String?
+  note      String?
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  entries   JournalEntry[]
+}
+
+model FiscalPeriod {
+  id        String         @id @default(cuid())
+  name      String
+  startDate DateTime       @db.Date
+  endDate   DateTime       @db.Date
+  isClosed  Boolean        @default(false)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  entries   JournalEntry[]
+}
+
+model JournalEntry {
+  id             String        @id @default(cuid())
+  entryNumber    Int           @unique @default(autoincrement())
+  date           DateTime      @db.Date
+  description    String
+  status         EntryStatus   @default(POSTED)
+  partnerId      String?
+  partner        Partner?      @relation(fields: [partnerId], references: [id])
+  fiscalPeriodId String
+  fiscalPeriod   FiscalPeriod  @relation(fields: [fiscalPeriodId], references: [id])
+  lines          JournalLine[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([date])
+  @@index([fiscalPeriodId])
+}
+
+model JournalLine {
+  id        String       @id @default(cuid())
+  entryId   String
+  entry     JournalEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  accountId String
+  account   Account      @relation(fields: [accountId], references: [id])
+  debit     Decimal      @default(0) @db.Decimal(14, 0)
+  credit    Decimal      @default(0) @db.Decimal(14, 0)
+  memo      String?
+  lineOrder Int          @default(0)
+
+  @@index([accountId])
+  @@index([entryId])
+}

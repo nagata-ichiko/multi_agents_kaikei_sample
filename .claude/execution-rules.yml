@@ -1,0 +1,18 @@
+# =============================================================================
+# execution-rules.yml — 会計アプリ（Next.js + Prisma + PostgreSQL on Docker）
+# =============================================================================
+# アプリはローカル npm で実行、DB のみ Docker（docker-compose、サービス名: db）
+
+verification:
+  mode: build-only
+
+rules:
+  - pattern: "npx prisma (migrate|db)"
+    must: null
+    require_services: ["db"]
+    reason: "Prisma のマイグレーション/シードは PostgreSQL コンテナ（db）が起動している必要があります"
+
+  - pattern: "npm run dev"
+    must: null
+    require_services: ["db"]
+    reason: "開発サーバーは PostgreSQL コンテナ（db）が起動している必要があります"

@@ -12,3 +12,69 @@
 #         confirmed: N
 #
 # spec_version > confirmed → 未確認（Spec変更後の修正・確認が必要）
+
+# 共通基盤（フェーズ1）
+SHARED-FOUNDATION-001:
+  spec_version: 1
+  implementation:
+    - path: prisma/schema.prisma
+      confirmed: 1
+    - path: prisma/seed.ts
+      confirmed: 1
+    - path: src/lib/prisma.ts
+      confirmed: 1
+    - path: src/lib/format.ts
+      confirmed: 1
+    - path: src/lib/api-helpers.ts
+      confirmed: 1
+    - path: src/lib/client-fetch.ts
+      confirmed: 1
+    - path: src/types/ledger.ts
+      confirmed: 1
+    - path: src/types/master.ts
+      confirmed: 1
+    - path: src/types/reporting.ts
+      confirmed: 1
+    - path: src/components/ui/Button.tsx
+      confirmed: 1
+    - path: src/components/ui/Input.tsx
+      confirmed: 1
+    - path: src/components/ui/Select.tsx
+      confirmed: 1
+    - path: src/components/ui/Textarea.tsx
+      confirmed: 1
+    - path: src/components/ui/Card.tsx
+      confirmed: 1
+    - path: src/components/ui/Table.tsx
+      confirmed: 1
+    - path: src/components/ui/Modal.tsx
+      confirmed: 1
+    - path: src/components/ui/Badge.tsx
+      confirmed: 1
+    - path: src/components/ui/PageHeader.tsx
+      confirmed: 1
+    - path: src/components/ui/EmptyState.tsx
+      confirmed: 1
+    - path: src/components/ui/Toast.tsx
+      confirmed: 1
+    - path: src/components/ui/ConfirmDialog.tsx
+      confirmed: 1
+    - path: src/components/ui/Pagination.tsx
+      confirmed: 1
+    - path: src/components/layout/Sidebar.tsx
+      confirmed: 1
+    - path: src/components/layout/Header.tsx
+      confirmed: 1
+    - path: src/app/layout.tsx
+      confirmed: 1
+    - path: src/app/(app)/layout.tsx
+      confirmed: 1
+    - path: src/app/(app)/page.tsx
+      confirmed: 1
+    - path: docker-compose.yml
+      confirmed: 1
+    - path: vitest.config.ts
+      confirmed: 1
+  tests:
+    - path: src/lib/format.test.ts
+      confirmed: 1
