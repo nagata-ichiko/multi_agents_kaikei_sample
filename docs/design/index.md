@@ -12,3 +12,12 @@
 | 帳票設計書 | detail-design |
 
 テンプレートは「テンプレート」タブから参照できます。
+
+## 基本設計書一覧
+
+| ドキュメント | リンク |
+|------------|--------|
+| アーキテクチャ概要 | [architecture.md](architecture.md) |
+| DB設計 | [db-design.md](db-design.md) |
+| API設計概要 | [api-spec.md](api-spec.md) |
+| Spec依存グラフ | [dependency-graph.md](dependency-graph.md) |

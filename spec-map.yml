@@ -78,3 +78,68 @@ SHARED-FOUNDATION-001:
   tests:
     - path: src/lib/format.test.ts
       confirmed: 1
+
+# --- ledger ドメイン ---
+REQ-LEDGER-001:
+  spec_version: 1
+  depends_on:
+    - REQ-LEDGER-002
+    - REQ-MASTER-001
+    - REQ-MASTER-002
+  implementation: []  # 実装後に implement-spec が記入する
+  tests: []           # 実装後に implement-spec が記入する
+
+REQ-LEDGER-002:
+  spec_version: 1
+  depends_on: []
+  implementation: []
+  tests: []
+
+REQ-LEDGER-003:
+  spec_version: 1
+  depends_on:
+    - REQ-LEDGER-001
+    - REQ-LEDGER-002
+    - REQ-MASTER-002
+  implementation: []
+  tests: []
+
+# --- reporting ドメイン ---
+REQ-REPORT-001:
+  spec_version: 1
+  depends_on:
+    - REQ-LEDGER-002
+    - REQ-MASTER-002
+  implementation: []
+  tests: []
+
+REQ-REPORT-002:
+  spec_version: 1
+  depends_on:
+    - REQ-LEDGER-002
+    - REQ-MASTER-002
+    - REQ-REPORT-001
+  implementation: []
+  tests: []
+
+REQ-REPORT-003:
+  spec_version: 1
+  depends_on:
+    - REQ-LEDGER-001
+    - REQ-MASTER-002
+    - REQ-REPORT-002
+  implementation: []
+  tests: []
+
+# --- master ドメイン ---
+REQ-MASTER-001:
+  spec_version: 1
+  depends_on: []
+  implementation: []
+  tests: []
+
+REQ-MASTER-002:
+  spec_version: 1
+  depends_on: []
+  implementation: []
+  tests: []
