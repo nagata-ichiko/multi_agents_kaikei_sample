@@ -106,8 +106,10 @@ export async function PATCH(req: NextRequest, { params }: Params) {
 
     // 明細を全置換（トランザクション）
     const updated = await prisma.$transaction(async (tx) => {
-      // 既存明細を削除
-      await tx.journalLine.deleteMany({ where: { entryId: id } });
+      // 既存明細を削除（新しい明細数の分だけ入れ替える）
+      await tx.journalLine.deleteMany({
+        where: { entryId: id, lineOrder: { lt: parsed.lines.length } },
+      });
 
       // 新しい明細で更新
       return tx.journalEntry.update({

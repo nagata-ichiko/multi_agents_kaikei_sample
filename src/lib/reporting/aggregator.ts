@@ -225,7 +225,7 @@ export async function calcBalanceSheet(
   let entryDateWhere: Record<string, Date> | undefined;
 
   if (asOf) {
-    entryDateWhere = { lte: new Date(asOf) };
+    entryDateWhere = { lt: new Date(asOf) };
   } else {
     // 期間の endDate を取得
     const period = await prisma.fiscalPeriod.findUnique({
