@@ -79,6 +79,7 @@ SHARED-FOUNDATION-001:
     - path: src/lib/format.test.ts
       confirmed: 1
 
+
 # --- ledger ドメイン ---
 REQ-LEDGER-001:
   spec_version: 1
@@ -86,14 +87,50 @@ REQ-LEDGER-001:
     - REQ-LEDGER-002
     - REQ-MASTER-001
     - REQ-MASTER-002
-  implementation: []  # 実装後に implement-spec が記入する
-  tests: []           # 実装後に implement-spec が記入する
+  implementation:
+    - path: src/app/api/ledger/journal-entries/route.ts
+      confirmed: 1
+    - path: src/app/api/ledger/journal-entries/[id]/route.ts
+      confirmed: 1
+    - path: src/lib/ledger/schemas.ts:JournalEntryInputSchema
+      confirmed: 1
+    - path: src/lib/ledger/validate.ts:resolveFiscalPeriod
+      confirmed: 1
+    - path: src/lib/ledger/balance.ts:checkBalance
+      confirmed: 1
+    - path: src/app/(app)/journal-entries/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/journal-entries/new/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/journal-entries/[id]/edit/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/journal-entries/_components/JournalEntryForm.tsx
+      confirmed: 1
+  tests:
+    - path: src/lib/ledger/validate.test.ts
+      confirmed: 1
+    - path: src/lib/ledger/schemas.test.ts
+      confirmed: 1
 
 REQ-LEDGER-002:
   spec_version: 1
   depends_on: []
-  implementation: []
-  tests: []
+  implementation:
+    - path: src/app/api/ledger/accounts/route.ts
+      confirmed: 1
+    - path: src/app/api/ledger/accounts/[id]/route.ts
+      confirmed: 1
+    - path: src/lib/ledger/schemas.ts:AccountCreateSchema
+      confirmed: 1
+    - path: src/lib/ledger/schemas.ts:AccountUpdateSchema
+      confirmed: 1
+    - path: src/app/(app)/accounts/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/accounts/_components/AccountModal.tsx
+      confirmed: 1
+  tests:
+    - path: src/lib/ledger/schemas.test.ts
+      confirmed: 1
 
 REQ-LEDGER-003:
   spec_version: 1
@@ -101,8 +138,18 @@ REQ-LEDGER-003:
     - REQ-LEDGER-001
     - REQ-LEDGER-002
     - REQ-MASTER-002
-  implementation: []
-  tests: []
+  implementation:
+    - path: src/app/api/ledger/general-ledger/route.ts
+      confirmed: 1
+    - path: src/lib/ledger/generalLedger.ts:calcGeneralLedger
+      confirmed: 1
+    - path: src/app/(app)/books/journal/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/books/general-ledger/page.tsx
+      confirmed: 1
+  tests:
+    - path: src/lib/ledger/generalLedger.test.ts
+      confirmed: 1
 
 # --- reporting ドメイン ---
 REQ-REPORT-001:
@@ -110,8 +157,20 @@ REQ-REPORT-001:
   depends_on:
     - REQ-LEDGER-002
     - REQ-MASTER-002
-  implementation: []
-  tests: []
+  implementation:
+    - path: src/lib/reporting/aggregator.ts:calcTrialBalance
+      confirmed: 1
+    - path: src/app/api/reporting/trial-balance/route.ts
+      confirmed: 1
+    - path: src/app/(app)/reports/trial-balance/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/reports/trial-balance/_components/TrialBalanceTable.tsx
+      confirmed: 1
+    - path: src/app/(app)/_components/FiscalPeriodSelector.tsx
+      confirmed: 1
+  tests:
+    - path: src/lib/reporting/aggregator.test.ts
+      confirmed: 1
 
 REQ-REPORT-002:
   spec_version: 1
@@ -119,8 +178,26 @@ REQ-REPORT-002:
     - REQ-LEDGER-002
     - REQ-MASTER-002
     - REQ-REPORT-001
-  implementation: []
-  tests: []
+  implementation:
+    - path: src/lib/reporting/aggregator.ts:calcIncomeStatement
+      confirmed: 1
+    - path: src/lib/reporting/aggregator.ts:calcBalanceSheet
+      confirmed: 1
+    - path: src/app/api/reporting/income-statement/route.ts
+      confirmed: 1
+    - path: src/app/api/reporting/balance-sheet/route.ts
+      confirmed: 1
+    - path: src/app/(app)/reports/income-statement/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/reports/income-statement/_components/StatementSection.tsx
+      confirmed: 1
+    - path: src/app/(app)/reports/balance-sheet/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/reports/balance-sheet/_components/BalanceSheetTable.tsx
+      confirmed: 1
+  tests:
+    - path: src/lib/reporting/aggregator.test.ts
+      confirmed: 1
 
 REQ-REPORT-003:
   spec_version: 1
@@ -128,18 +205,58 @@ REQ-REPORT-003:
     - REQ-LEDGER-001
     - REQ-MASTER-002
     - REQ-REPORT-002
-  implementation: []
-  tests: []
+  implementation:
+    - path: src/lib/reporting/aggregator.ts:calcDashboard
+      confirmed: 1
+    - path: src/app/api/reporting/dashboard/route.ts
+      confirmed: 1
+    - path: src/app/(app)/page.tsx
+      confirmed: 1
+  tests:
+    - path: src/lib/reporting/aggregator.test.ts
+      confirmed: 1
 
 # --- master ドメイン ---
 REQ-MASTER-001:
   spec_version: 1
   depends_on: []
-  implementation: []
-  tests: []
+  implementation:
+    - path: src/app/api/master/partners/route.ts
+      confirmed: 1
+    - path: src/app/api/master/partners/[id]/route.ts
+      confirmed: 1
+    - path: src/lib/master/schemas.ts
+      confirmed: 1
+    - path: src/app/(app)/partners/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/partners/_components/PartnerTable.tsx
+      confirmed: 1
+    - path: src/app/(app)/partners/_components/PartnerFormModal.tsx
+      confirmed: 1
+    - path: src/app/(app)/partners/_components/PartnerFilterBar.tsx
+      confirmed: 1
+  tests:
+    - path: src/lib/master/fiscal-period-overlap.test.ts
+      confirmed: 1
 
 REQ-MASTER-002:
   spec_version: 1
   depends_on: []
-  implementation: []
-  tests: []
+  implementation:
+    - path: src/app/api/master/fiscal-periods/route.ts
+      confirmed: 1
+    - path: src/app/api/master/fiscal-periods/[id]/route.ts
+      confirmed: 1
+    - path: src/lib/master/schemas.ts
+      confirmed: 1
+    - path: src/lib/master/fiscal-period-overlap.ts
+      confirmed: 1
+    - path: src/app/(app)/settings/fiscal-periods/page.tsx
+      confirmed: 1
+    - path: src/app/(app)/settings/fiscal-periods/_components/FiscalPeriodTable.tsx
+      confirmed: 1
+    - path: src/app/(app)/settings/fiscal-periods/_components/FiscalPeriodFormModal.tsx
+      confirmed: 1
+  tests:
+    - path: src/lib/master/fiscal-period-overlap.test.ts
+      confirmed: 1

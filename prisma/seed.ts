@@ -159,6 +159,21 @@ async function main() {
 
   // 2026年度 40件程度
   const fy2026Entries = [
+    // 前期繰越（fy2025 期末残高を fy2026 期首へ繰り越す）
+    {
+      date: new Date("2026-04-01"),
+      description: "前期繰越 - 開始残高",
+      status: EntryStatus.POSTED,
+      fiscalPeriodId: fy2026.id,
+      lines: [
+        { accountId: accountMap["101"], debit: 500000, credit: 0, memo: "現金 期首残高", lineOrder: 0 },
+        { accountId: accountMap["102"], debit: 2000000, credit: 0, memo: "普通預金 期首残高", lineOrder: 1 },
+        { accountId: accountMap["103"], debit: 330000, credit: 0, memo: "売掛金 期首残高", lineOrder: 2 },
+        { accountId: accountMap["106"], debit: 100000, credit: 0, memo: "工具器具備品 期首残高", lineOrder: 3 },
+        { accountId: accountMap["301"], debit: 0, credit: 2600000, memo: "資本金", lineOrder: 4 },
+        { accountId: accountMap["302"], debit: 0, credit: 330000, memo: "前期繰越利益", lineOrder: 5 },
+      ],
+    },
     // 4月
     {
       date: new Date("2026-04-01"),
